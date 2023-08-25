@@ -1,11 +1,11 @@
 # SIMPLE
 Scattering Informed Microstructure Prediction during Lagrangian Evolution - Young et al. Rheo Acta 2023
 
-##### Instructions for training SIMPLE models #####
+# Instructions for training SIMPLE models
 
 Last update - 07/25/2023 by CDY
 
-##### Notes on training data in BD_FFoRM #####
+# Notes on training data in BD_FFoRM #####
 
 For simplicity of this tutorial and file size reduction, the data generation process, ....
 preprocessing for frame indifference and phase alignment, and the linear dimension ...
@@ -20,9 +20,9 @@ M = no. of snapshots = 106663 in this tutorial
 dPCA = no. of PCA modes retained = 50 in this tutorial
 aligned_stress_snaps_M.p: snapshots of aligned stress tensor \sigma_P,\alpha \in M x 9
 GdotE_snaps_M.p: lab-frame velocity gradient tensor \in M x 9 and rate of strain tensor \in M x 9
-# Note velocity gradient tensor is for visualizing flow type, even though it is not a model input
+Note velocity gradient tensor is for visualizing flow type, even though it is not a model input
 PCA_modes_M.p: The leading X PCA modes after truncation. shape d_o x 100
-# Note I kept 100 here just to test effect of dPCA=25,50,100. Use this matrix to reconstruct after time evolution/decoding
+Note I kept 100 here just to test effect of dPCA=25,50,100. Use this matrix to reconstruct after time evolution/decoding
 Qphase_snaps_M.p: snapshots of vorticity rotation matrix Q \in M x 9 and co-rotating phase \alpha \in M x 1
 
 For files in FFoRM_streamlines, there is on file for each streamline
@@ -38,12 +38,12 @@ Gdotout: lab frame velocity gradient tensor interpolated on even intervals \Delt
 Eout: lab frame rate of strain tensor "
 QaT_stress_Qa: phase-aligned stress tensor
 
-# This is all the data that should be required for training AEs, NODEs, and stress models and test on a few streamlines
-# For completeness, the files to generate all data from scratch are included in 'openfoam' and 'BD_FFoRM'
-# Further details on the complete data generation process are included after instructions for training (in progress)
-# Data for testing trained models on data not seen in the FFoRM are in BD_test_data (instructions in progress)
+This is all the data that should be required for training AEs, NODEs, and stress models and test on a few streamlines
+For completeness, the files to generate all data from scratch are included in 'openfoam' and 'BD_FFoRM'
+Further details on the complete data generation process are included after instructions for training (in progress)
+Data for testing trained models on data not seen in the FFoRM are in BD_test_data (instructions in progress)
 
-##### Training summary #####
+# Training summary
 
 1) Train autoencoder using IRMAE.py
 2) Determine number of non-zero singular values
@@ -52,7 +52,7 @@ QaT_stress_Qa: phase-aligned stress tensor
 5) Train stress model with stress_haligned.py
 6) Deploy trained SIMPLE framework with pred_interp.py or pred_extrap.py
 
-##### Training autoencoders #####
+# Training autoencoders
 
 Enter the 'autoencoder' directory
 IRMAE.py is the code to train the autoencoder for input phase-aligned PCA modes
@@ -75,7 +75,7 @@ $ python IRMAE.py --train 0 --model 1 --wtdc 5e-3 --nlin 4 --optim AdamW --dh 6
 Now the encoded training data will be saved in 'encoded_data.p', which can be input to ...
 the time evolution NODE or the stress NN
 
-##### Training Neural ODEs #####
+# Training Neural ODEs
 
 Enter the 'integrate' directory
 NODE.py is the code to train the evolution of the latent space phase-aligned structure (h) ...
@@ -87,7 +87,7 @@ for 6-7 of 10 models with relatively arbitrary parameter selection
 
 $ python NODE.py --ae_model 1
 
-##### Training stress models #####
+# Training stress models
 
 Enter the 'stress' directory
 stress_haligned.py is the code to train the model mapping the phase-aligned latent space and rate of strain tensor ...
@@ -99,7 +99,7 @@ because the flow is planar
 
 $ python stress_haligned.py --ae_model 1
 
-##### Deploying the fully trained framework #####
+# Deploying the fully trained framework
 
 After training the autoencoder, NODE, and stress model, the three can be used together
 Under the integrate directory, pred_interp.py will predict FFoRM streamlines, and pred_extrap.py will predict ...
