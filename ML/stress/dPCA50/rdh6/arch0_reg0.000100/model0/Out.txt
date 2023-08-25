@@ -1,0 +1,8 @@
+/Users/charlesyoung/Documents/FFoRM-sSAXS/github_v1/ML/stress/dPCA50/rdh6/arch0_reg0.000100/model0
+/Users/charlesyoung/Documents/FFoRM-sSAXS/github_v1/ML/stress/dPCA50/rdh6/arch0_reg0.000100/model0
+/Users/charlesyoung/Documents/FFoRM-sSAXS/github_v1/ML/stress/dPCA50/rdh6/arch0_reg0.000100/model0
+/Users/charlesyoung/Documents/FFoRM-sSAXS/github_v1/ML/stress/dPCA50/rdh6/arch0_reg0.000100/model0
+/Users/charlesyoung/Documents/FFoRM-sSAXS/github_v1/ML/stress/dPCA50/rdh6/arch0_reg0.000100/model0
+/Users/charlesyoung/Documents/FFoRM-sSAXS/github_v1/ML/stress/dPCA50/rdh6/arch0_reg0.000100/model0
+NN output shape (20372, 9)
+MSE test - 6.324824e+00

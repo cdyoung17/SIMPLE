@@ -1,0 +1,12 @@
+#!/bin/bash
+
+#PBS -N .FFAE_AdamW_w1.00e-05_l4_mod2
+#PBS -l nodes=prandtl35:ppn=1
+#PBS -k oe
+#PBS -j oe
+#PBS -l walltime=10:00:00:00
+#PBS -q parallel
+cd $PBS_O_WORKDIR
+./IRMAE.py --train 1 --downs 5 --model 2 --wtdc 1.000000e-05 --nlin 4 --optim AdamW
+exit 0
+
