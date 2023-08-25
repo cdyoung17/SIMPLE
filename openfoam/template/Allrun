@@ -1,0 +1,38 @@
+#!/bin/bash
+
+# Source OpenFOAM BASH profile
+. /opt/openfoam6/etc/bashrc
+. /home/foam/.bashrc
+
+# Export fix for OPENMPI in a container
+export OMPI_MCA_btl_vader_single_copy_mechanism=none
+
+# Source tutorial run functions
+. $WM_PROJECT_DIR/bin/tools/RunFunctions
+
+proc=5
+
+runApplication blockMesh
+runApplication checkMesh
+
+# Parallel
+runApplication decomposePar -latestTime
+mpirun -np $proc rheoFoam -parallel > log.rheoFoam
+mpirun -np $proc postProcess -func "grad(U)" -parallel > log.gradU
+mpirun -np $proc postProcess -func "vorticity" -parallel > log.vorticity
+
+#mv system/singleGraph1 system/singleGraph
+#mpirun -np $proc postProcess -func singleGraph -parallel > log.singleGraph1
+#mv postProcessing/singleGraph postProcessing/singleGraph1
+#mv system/singleGraph system/singleGraph1
+#mv system/singleGraph2 system/singleGraph
+#mpirun -np $proc postProcess -func singleGraph -parallel > log.singleGraph2
+#mv system/singleGraph system/singleGraph2
+#mv postProcessing/singleGraph postProcessing/singleGraph2
+
+#mpirun -np $proc postProcess -func sampleDict -parallel > log.sample
+
+runApplication reconstructPar #-time 4000
+
+# Serial
+# runApplication $(getApplication)

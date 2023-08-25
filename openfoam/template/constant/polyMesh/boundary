@@ -1,0 +1,91 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+  =========                 |
+  \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox
+   \\    /   O peration     | Website:  https://openfoam.org
+    \\  /    A nd           | Version:  6
+     \\/     M anipulation  |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       polyBoundaryMesh;
+    location    "constant/polyMesh";
+    object      boundary;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+11
+(
+    outlet_northleft
+    {
+        type            patch;
+        nFaces          100;
+        startFace       278500;
+    }
+    pressure_northright
+    {
+        type            patch;
+        nFaces          100;
+        startFace       278600;
+    }
+    pressure_southleft
+    {
+        type            patch;
+        nFaces          100;
+        startFace       278700;
+    }
+    outlet_southright
+    {
+        type            patch;
+        nFaces          100;
+        startFace       278800;
+    }
+    inlet_easttop
+    {
+        type            patch;
+        nFaces          100;
+        startFace       278900;
+    }
+    pressure_eastbottom
+    {
+        type            patch;
+        nFaces          100;
+        startFace       279000;
+    }
+    pressure_westtop
+    {
+        type            patch;
+        nFaces          100;
+        startFace       279100;
+    }
+    inlet_westbottom
+    {
+        type            patch;
+        nFaces          100;
+        startFace       279200;
+    }
+    walls
+    {
+        type            wall;
+        inGroups        1(wall);
+        nFaces          2200;
+        startFace       279300;
+    }
+    frontAndBack
+    {
+        type            empty;
+        inGroups        1(empty);
+        nFaces          0;
+        startFace       281500;
+    }
+    defaultFaces
+    {
+        type            empty;
+        inGroups        1(empty);
+        nFaces          280000;
+        startFace       281500;
+    }
+)
+
+// ************************************************************************* //

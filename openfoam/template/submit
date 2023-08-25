@@ -1,0 +1,23 @@
+
+#!/bin/sh -f
+
+#PBS -N FFoRM_FRRsweep1
+
+#PBS -l nodes=1:ppn=4
+
+#PBS -k oe
+
+#PBS -l walltime=10:00:00:00
+
+#PBS -q parallel
+
+cd $PBS_O_WORKDIR
+
+## YOUR EXECUTABLES COME HERE!!!
+# docker container run --rm -v $PWD:/data -w /data \
+docker container run --rm -v $PWD:/data -w /data myrheotool:v5 ./Allrun
+# docker container run --rm -v $PWD:/data -w /data cfdengine/openfoam
+# icoFoam > log &
+#         Write them as you would execute them in terminal.
+
+exit 0 

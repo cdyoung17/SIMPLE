@@ -1,0 +1,72 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+  =========                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  7.0                                   |
+|   \\  /    A nd           | Website:  https://openfoam.org                  |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       volSymmTensorField;
+    object      theta;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+dimensions      [0 0 0 0 0 0 0];
+
+internalField   uniform (0 0 0 0 0 0);
+
+boundaryField
+{
+    walls
+    {     
+        type            zeroGradient;
+    }  	
+    inlet_westbottom
+    {
+        type            fixedValue;
+        value           uniform (0 0 0 0 0 0);
+    }
+    inlet_easttop
+    {
+        type            fixedValue;
+        value           uniform (0 0 0 0 0 0);
+    }     
+    outlet_northleft
+    {
+        type            zeroGradient; //if outlet
+        //type            fixedValue;
+        //value           uniform (0 0 0 0 0 0);    //if inlet 
+    }
+    outlet_southright
+    {
+        type            zeroGradient; //if outlet
+        //type            fixedValue;
+        //value           uniform (0 0 0 0 0 0);    //if inlet      
+    }
+    pressure_northright
+    {
+        type            zeroGradient;
+    }
+    pressure_southleft
+    {
+        type            zeroGradient;
+    }
+    pressure_westtop
+    {
+        type            zeroGradient;
+    }
+    pressure_eastbottom
+    {
+        type            zeroGradient;
+    }	
+    frontAndBack
+    {
+        type            empty;
+    }
+
+}
+
+// ************************************************************************* //

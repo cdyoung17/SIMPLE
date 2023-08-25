@@ -1,0 +1,289 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+  =========                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  7.0                                   |
+|   \\  /    A nd           | Website:  https://openfoam.org                  |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    object      blockMeshDict;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+convertToMeters 0.005; //0.001 mm
+
+indis 100;//inner discritization
+transdis 25;//transition zone discritization keep this about 1/4 of indis
+chandis 100;//channel length discritization
+
+vertices
+(
+  (-0.5 5 0) //0
+  (-0.1 5 0)
+  (0.1 5 0)
+  (0.5 5 0)
+  (-0.5 0.6 0) //4
+  (-0.1 0.6 0)
+  (0.1 0.6 0)
+  (0.5 0.6 0)
+  (-5 0.5 0) //8
+  (-0.6 0.5 0)
+  (0 0.5 0)
+  (0.6 0.5 0)
+  (5 0.5 0)
+  (-5 0.1 0) //13
+  (-0.6 0.1 0)
+  (0.6 0.1 0)
+  (5 0.1 0)
+  (-0.5 0 0) //17
+  (0.5 0 0)
+  (-5 -0.1 0) //19
+  (-0.6 -0.1 0)
+  (0.6 -0.1 0)
+  (5 -0.1 0)
+  (-5 -0.5 0) //23
+  (-0.6 -0.5 0)
+  (0 -0.5 0)
+  (0.6 -0.5 0)
+  (5 -0.5 0)
+  (-0.5 -0.6 0) //28
+  (-0.1 -0.6 0)
+  (0.1 -0.6 0)
+  (0.5 -0.6 0)
+  (-0.5 -5 0) //32
+  (-0.1 -5 0)
+  (0.1 -5 0)
+  (0.5 -5 0)
+  
+  (-0.5 5 1) //36
+  (-0.1 5 1)
+  (0.1 5 1)
+  (0.5 5 1)
+  (-0.5 0.6 1) //40
+  (-0.1 0.6 1)
+  (0.1 0.6 1)
+  (0.5 0.6 1)
+  (-5 0.5 1) //44
+  (-0.6 0.5 1)
+  (0 0.5 1)
+  (0.6 0.5 1)
+  (5 0.5 1)
+  (-5 0.1 1) //49
+  (-0.6 0.1 1)
+  (0.6 0.1 1)
+  (5 0.1 1)
+  (-0.5 0 1) //53
+  (0.5 0 1)
+  (-5 -0.1 1) //55
+  (-0.6 -0.1 1)
+  (0.6 -0.1 1)
+  (5 -0.1 1)
+  (-5 -0.5 1) //59
+  (-0.6 -0.5 1)
+  (0 -0.5 1)
+  (0.6 -0.5 1)
+  (5 -0.5 1)
+  (-0.5 -0.6 1) //64
+  (-0.1 -0.6 1)
+  (0.1 -0.6 1)
+  (0.5 -0.6 1)
+  (-0.5 -5 1) //68
+  (-0.1 -5 1)
+  (0.1 -5 1)
+  (0.5 -5 1)
+  
+);
+
+edges
+(	
+	arc 4 9 (-0.529289 0.529289 0)// corner curves
+	arc 40 45 (-0.529289 0.529289 1)
+	arc 7 11 (0.529289 0.529289 0)
+	arc 43 47 (0.529289 0.529289 1)
+	arc 26 31 (0.529289 -0.529289 0)
+	arc 62 67 (0.529289 -0.529289 1)
+	arc 24 28 (-0.529289 -0.529289 0)
+	arc 60 64 (-0.529289 -0.529289 1)
+	
+	arc 5 10 (-0.0707107 0.529289 0)//north corners
+	arc 41 46 (-0.0707107 0.529289 1)
+	arc 10 6 (0.0707107 0.529289 0)
+	arc 46 42 (0.0707107 0.529289 1)
+	
+	arc 14 17 (-0.529289 0.0707107 0)//west corners
+	arc 50 53 (-0.529289 0.0707107 1)
+	arc 20 17 (-0.529289 -0.0707107 0)
+	arc 56 53 (-0.529289 -0.0707107 1)
+	
+	arc 18 15 (0.529289 0.0707107 0)//east corners
+	arc 54 51 (0.529289 0.0707107 1)
+	arc 18 21 (0.529289 -0.0707107 0)
+	arc 54 57 (0.529289 -0.0707107 1)
+	
+	arc 29 25 (-0.0707107 -0.529289 0)//south corners
+	arc 65 61 (-0.0707107 -0.529289 1)
+	arc 25 30 (0.0707107 -0.529289 0)
+	arc 61 66 (0.0707107 -0.529289 1)
+);
+
+blocks
+(
+    hex (4 5 1 0 40 41 37 36) ($indis $chandis 1) simpleGrading (1 10 1) //0 upper left channel
+    hex (6 7 3 2 42 43 39 38) ($indis $chandis 1) simpleGrading (1 10 1) //1 upper right channel
+    
+    hex (13 14 9 8 49 50 45 44) ($chandis $indis 1) simpleGrading (0.1 1 1) //2 left upper channel
+    hex (15 16 12 11 51 52 48 47) ($chandis $indis 1) simpleGrading (10 1 1) //3 right upper channel
+    
+    hex (23 24 20 19 59 60 56 55) ($chandis $indis 1) simpleGrading (0.1 1 1) //4 left lower channel
+    hex (26 27 22 21 62 63 58 57) ($chandis $indis 1) simpleGrading (10 1 1) //5 right lower channel
+    
+    hex (32 33 29 28 68 69 65 64) ($indis $chandis 1) simpleGrading (1 0.1 1) //6 lower left channel
+    hex (34 35 31 30 70 71 67 66) ($indis $chandis 1) simpleGrading (1 0.1 1) //7 lower right channel
+    
+    hex (14 5 4 9 50 41 40 45) ($indis $indis 1) simpleGrading (1 1 1) //8 top left outer  
+    hex (6 15 11 7 42 51 47 43) ($indis $indis 1) simpleGrading (1 1 1) //9 top right outer 
+    hex (24 28 29 20 60 64 65 56) ($indis $indis 1) simpleGrading (1 1 1) //10 bottom left outer
+    hex (30 31 26 21 66 67 62 57) ($indis $indis 1) simpleGrading (1 1 1) //11 bottom right outer
+    
+    hex (14 17 10 5 50 53 46 41) ($transdis $indis 1) simpleGrading (1 1 1) //12 top left inner    
+    hex (10 18 15 6 46 54 51 42) ($indis $transdis 1) simpleGrading (1 1 1) //13 top right inner 
+    hex (20 29 25 17 56 65 61 53) ($indis $transdis 1) simpleGrading (1 1 1) //14 bottom left inner    
+    hex (25 30 21 18 61 66 57 54) ($transdis $indis 1) simpleGrading (1 1 1) //15 bottom right inner
+    
+    hex (17 25 18 10 53 61 54 46) ($indis $indis 1) simpleGrading (1 1 1) //16 middle             	
+);
+
+
+
+boundary
+(
+   
+   outlet_northleft
+     {
+      type patch;
+      faces
+      (
+       (1 0 36 37)
+        );
+    }
+	
+   pressure_northright
+     {
+      type patch;
+      faces
+      (
+       (3 2 38 39) 
+        );
+    }
+   
+   pressure_southleft
+    {
+        type patch;
+        faces
+        (
+        (32 33 69 68) 
+        );
+    }
+	
+   outlet_southright
+    {
+        type patch;
+        faces
+        (
+        (34 35 71 70)
+        );
+    }    
+	
+	
+    inlet_easttop
+    {
+        type patch;
+        faces
+        (
+          (16 12 48 52)  
+        );
+    }     
+    pressure_eastbottom
+    {
+        type patch;
+        faces
+        (
+	(27 22 58 63)     
+        );
+    }      
+    pressure_westtop
+    {
+        type patch;
+        faces
+        (
+        (8 13 49 44)
+        );
+    }
+   inlet_westbottom
+    {
+        type patch;
+        faces
+        (
+	(19 23 59 55)  
+        );
+    }
+    walls
+    {
+        type wall;
+        faces
+        (		
+	(0 4 40 36) //top channels
+	(5 1 37 41)
+	(2 6 42 38)
+	(7 3 39 43)
+	
+	(9 8 44 45)//left channels
+	(13 14 50 49)
+	(20 19 55 56)
+	(23 24 60 59)
+	
+	(12 11 47 48)//right channels
+	(15 16 52 51)
+	(22 21 57 58)
+	(26 27 63 62)
+	
+	(28 32 68 64)//bottom channels
+	(33 29 65 69)
+	(30 34 70 66)
+	(35 31 67 71)
+	
+	(4 9 45 40)//channel corners
+	(11 7 43 47)
+	(24 28 64 60)
+	(31 26 62 67)
+	
+	(10 5 41 46)//center corners
+	(6 10 46 42)
+	(14 17 50 53)
+	(17 20 56 53)
+	(18 15 51 54)
+	(21 18 54 57)
+	(29 25 61 65)
+	(25 30 66 61)	
+        );
+    }
+    
+    frontAndBack
+    {
+        type empty;
+        faces
+        (       			
+        );
+    }
+);
+
+mergePatchPairs
+(
+);
+
+// ************************************************************************* //
+   

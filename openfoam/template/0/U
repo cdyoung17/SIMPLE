@@ -1,0 +1,97 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+  =========                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  7.0                                   |
+|   \\  /    A nd           | Website:  https://openfoam.org                  |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       volVectorField;
+    object      U;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+dimensions      [0 1 -1 0 0 0 0];
+
+internalField   uniform (0 0 0);
+
+//Q2 0.001; //Q2 flow rate, m^3 per s
+
+//Q1 #calc -0.001 //Q1 flow rate, m^3 per s
+
+//FRR 1; //Q1 over Q2
+
+//Height 1; //channel height, mm
+
+//Width 0.4; //channel width, mm
+
+//Q1 #calc "$Q2*$FRR";
+
+//U1 #calc "(0-1.0*$Q1*0.01667/($Height*$Width))"; //m per s
+
+//U2 #calc "$Q2*0.01667/($Height*$Width)"; // m per s
+
+//negU1 #calc "-$U1"
+
+boundaryField
+{
+    walls
+    {
+        type            fixedValue;
+        value           uniform (0 0 0);
+    }
+    inlet_westbottom
+    {
+        type            flowRateInletVelocity;
+        volumetricFlowRate    	8.333e-7;
+        value           $internalField;
+    }
+    inlet_easttop
+    {
+        type            flowRateInletVelocity;
+        volumetricFlowRate    	8.333e-7;
+        value           $internalField;
+    }
+    outlet_northleft
+    {
+        type            flowRateInletVelocity;
+        volumetricFlowRate    	-8.333e-7;
+        value           $internalField;
+    }
+    outlet_southright
+    {
+        type            flowRateInletVelocity;
+        volumetricFlowRate    	-8.333e-7;
+        value           $internalField;
+    }
+    pressure_northright
+    {
+	type            zeroGradient;
+    }
+    pressure_southleft
+    {
+	type            zeroGradient;
+    }
+
+    pressure_westtop
+    {
+        type            zeroGradient;
+    }
+
+    pressure_eastbottom
+    {
+        type            zeroGradient;	
+    }	
+    frontAndBack
+    {
+        type            empty;
+    }
+  
+    
+    
+}
+
+// ************************************************************************* //
