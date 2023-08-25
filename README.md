@@ -111,7 +111,7 @@ movie input controls whether to generate a .mp4 of the lab frame time evolution
 
 $ python pred_interp.py --dh 6 --movie 1 --Q2 8.9
 
-##### Generating training data - further details #####
+# Generating training data - further details
 
 UNDER CONSTRUCTION
 
